@@ -1,8 +1,10 @@
 const express = require("express");
 const PORT = 8000;
+const fs = require("fs");
 const cors = require('cors');
 const mysql = require('mysql2');
 let latestCode ={};
+const Code = null;
 const pool = mysql.createPool({
   host: 'localhost',
   user: 'krateruser',
@@ -35,6 +37,29 @@ app.post("/code", (req, res) => {
 
 
   latestCode = { lang, code };
+  switch (latestCode.lang.toLowerCase()) {
+  case "c++":
+    fs.writeFileSync("temp.cpp", latestCode.code);
+    console.log("Compiling C++ code...");
+    break;
+
+  case "python":
+    fs.writeFileSync("temp.py", latestCode.code);
+    console.log("Running Python code...");
+    break;
+
+  case "java":
+    fs.writeFileSync("temp.java", latestCode.code);
+    console.log("Compiling Java code...");
+    break;
+  case "javascript":
+    fs.writeFileSync("temp.js", latestCode.code);
+    console.log("Compiling Java code...");
+    break;
+
+  default:
+    console.log("Unknown language!");
+}
 
   return res.status(201).json({
     success: true,
@@ -52,7 +77,6 @@ app.get("/code", (req, res) => {
   });
 });
 
-
 app.get("/data", (req, res) => {
   pool.query("SELECT * FROM users", (err, results) => {
     if (err) {
@@ -61,4 +85,8 @@ app.get("/data", (req, res) => {
     return res.json(results);
   });
 });
+
+
+
 app.listen(PORT, () => console.log(`Server started at PORT : ${PORT}`));
+
