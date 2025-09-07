@@ -20,8 +20,8 @@ app.use(
 
 // 🔧 Run code in Docker
 function runCode(filename, lang, callback) {
-  let args = [];
   const dockerImage = "my-lang-runner";
+  let args = [];
 
   switch (lang.toLowerCase()) {
     case "python":
@@ -69,24 +69,19 @@ function runCode(filename, lang, callback) {
     output += data.toString();
   });
 
-  child.on("close", () => {
-    callback(null, output); // return collected output after container exits
-  });
-
-  child.on("error", (err) => {
-    callback(err.message, null);
-  });
+  child.on("close", () => callback(null, output));
+  child.on("error", (err) => callback(err.message, null));
 }
 
 // 📝 Submit code
 app.post("/code", (req, res) => {
   const { lang, code } = req.body;
-
   if (!lang || !code) return res.status(400).json({ message: "Language and code are required" });
 
   latestCode = { lang, code };
-  let filename;
+  latestOutput = null; // ✅ clear previous output
 
+  let filename;
   switch (lang.toLowerCase()) {
     case "c++":
       filename = "temp.cpp";
@@ -107,8 +102,8 @@ app.post("/code", (req, res) => {
   fs.writeFileSync(filename, code);
 
   runCode(filename, lang, (err, output) => {
-    fs.unlinkSync(filename); // delete temp file after execution
-    latestOutput = err ? err : output; // store output for /output route
+    fs.unlinkSync(filename); // delete temp file
+    latestOutput = err ? err : output;
     return res.status(err ? 500 : 201).json({
       success: !err,
       output: latestOutput,
