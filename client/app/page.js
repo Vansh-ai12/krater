@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { auth } from "@/lib/kinde";
 import {
   RegisterLink,
   LoginLink,
@@ -40,14 +41,17 @@ export default async function Home() {
           }}
         >
           <li>
-            <LoginLink className="px-6 py-2 rounded-lg bg-gradient-to-r from-blue-600 to-blue-500 text-white font-medium shadow-md hover:scale-105 transition">
+            <button
+              onClick={() => auth.login()}
+              className="px-6 py-2 rounded-lg bg-gradient-to-r from-blue-600 to-blue-500 text-white font-medium shadow-md hover:scale-105 transition"
+            >
               Login
-            </LoginLink>
+            </button>
           </li>
           <li>
-            <RegisterLink className="px-6 py-2 rounded-lg bg-gradient-to-r from-green-600 to-green-500 text-white font-medium shadow-md hover:scale-105 transition">
-              Sign Up
-            </RegisterLink>
+            <button onClick={() => auth.register()} className="px-6 py-2 rounded-lg bg-gradient-to-r from-blue-600 to-blue-500 text-white font-medium shadow-md hover:scale-105 transition">
+              Login
+            </button>
           </li>
         </ul>
       ) : (
