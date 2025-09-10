@@ -1,0 +1,185 @@
+.Sidebar {
+    height: 100%;
+    width: 50px;
+    background-color: #0a0a0f; /* almost black */
+    background: rgba(10, 10, 15, 0.9); /* very dark, nearly opaque */
+    backdrop-filter: blur(10px);
+    border-right: 1px solid rgba(255, 255, 255, 0.05);
+    position: sticky;
+    transition: width 0.3s ease;
+    overflow: hidden;
+    z-index: 100;
+}
+
+.Sidebar:hover {
+    width: 250px; 
+}
+
+.SidebarList{
+    height:auto;
+    margin:0;
+    padding:0;
+    width:100%;
+
+}
+
+.SidebarList .row{
+    width:100%;
+    height:60px;
+  
+    list-style-type: none;
+    margin:0;
+    display:flex;
+    flex-direction: row;
+    color:white;
+    justify-content: flex-start;
+    align-items: center;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    transition: background-color 0.3s ease;
+}
+
+.SidebarList .row1{
+    width:100%;
+    height:60px;
+  
+    list-style-type: none;
+    margin:0;
+    display:flex;
+    flex-direction: row;
+    color:white;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    transition: background-color 0.3s ease;
+    gap:15px;
+}
+
+
+
+
+.row #icon{
+    width: 40px;
+    min-width: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.row #title{
+    white-space: nowrap;
+    opacity: 0;
+    margin-left: 10px;
+    transition: opacity 0.2s ease;
+   
+}
+
+.SidebarList .row:hover{
+    cursor:pointer;
+    background-color: #2B3744;
+    
+}
+
+
+.Sidebar:hover .row #title {
+    opacity: 1;
+}
+
+
+
+.SidebarList  #active{
+    background-color: #2B3744;
+}
+
+.row1 #icon{
+    width: 40px;
+    min-width: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.row1 #title{
+    white-space: nowrap;
+    opacity: 0;
+    display:none;
+    margin-left: 10px;
+    transition: opacity 0.2s ease;
+   
+}
+
+.Sidebar:hover .row1 #title {
+    display:block;
+    opacity: 1;
+}
+
+.SidebarList .row1:hover {
+    cursor:pointer;
+    background-color: #2B3744;
+}
+
+.vs-run-circle {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: #181818;      
+  color: white;
+  border: none;
+  cursor: pointer;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  transition: background 0.2s ease, transform 0.15s ease;
+}
+
+.vs-run-circle:hover {
+  background: #2a2a2a;       
+}
+
+.vs-run-circle:active {
+  transform: scale(0.9);     
+}
+
+
+
+.dropdown {
+  position: relative;
+  width: 200px;
+  user-select: none;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.dropdown select {
+  width: 100%;
+  padding: 10px;
+  background-color: #252526;
+  color: #d4d4d4;
+  border: 1px solid #3c3c3c;
+  border-radius: 4px;
+  appearance: none; /* remove default arrow */
+  font-size: 16px;
+  cursor: pointer;
+}
+
+/* Custom arrow */
+.dropdown::after {
+  content: '▼';
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+  pointer-events: none;
+  color: #d4d4d4;
+  font-size: 12px;
+}
+
+/* Options styling */
+select option {
+  background-color: #1e1e1e;
+  color: #d4d4d4;
+}
+
+select:focus {
+  outline: none;
+  border-color: #007acc;
+}
+
